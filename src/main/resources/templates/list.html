@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>View Employees</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <div th:replace="header::header"></div>
+</head>
+<body class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+<div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <div>
+            <div class="d-sm-flex align-items-center justify-content-between column-gap-3">
+                <a class="btn btn-info" th:href="@{/}" role="button">Cancel</a>
+                <h1 class="text-warning mb-3 " >Employees List</h1>
+
+                <div>
+                    <c:if test="${param.search!=null}">
+                        Filtered by: <c:out value="${param.search}"/>
+                        <a href="list">Clear</a>
+                    </c:if>
+
+                    <form class="d-flex" role="search" action = "list" method="get">
+                        <input class="form-control me-2" name = "search" type="search"   placeholder="Search" aria-label="Search" value="${param.search}" onfocus="select();">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+
+            </div>
+                 <div th:if="${totalEmployees!=0}">
+                    <table class="table table-bordered border-info">
+
+                        <thead class="text-light">
+                        <tr>
+                            <th>First name</th>
+                            <th>Last Name</th>
+                            <th>Birthdate</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-light">
+                        <tr th:each="employee:${list}">
+
+                                <td th:text="${employee.name}"></td>
+                                <td th:text="${employee.surname}"></td>
+                                <td th:text="${employee.birthdate}"></td>
+                                <td>
+
+                                    <a class="btn btn-info" href="#"  role="button">View</a>
+                                    <a class="btn btn-success" th:href= "@{'/edit/'+ ${employee.id}}"  role="button">Edit</a>
+                                    <a class="btn btn-danger" th:href= "@{'/delete/'+ ${employee.id}}"  role="button">Delete</a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                   <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" th:if="${page>1}" th:href="@{'/list/' + ${page - 1}}">Previous</a>
+                                <a class="page-link" th:unless="${page >1}">Previous</a>
+                            </li>
+                            <a th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                <li class="page-item" th:classappend="${page == i} ? 'page-item active' : 'page-item'">
+                                    <a class="page-link"  th:if="${page != i}" th:href="@{'/list/' + ${i}}">[[${i}]]</a>
+                                    <a class="page-link"th:unless="${page != i}">[[${i}]]</a>
+                                </li>
+                            </a>
+                            <li class="page-item">
+                                <a class="page-link" th:if="${page < totalPages}" th:href="@{'/list/' + ${page + 1}}">Next</a>
+                                <a class="page-link" th:unless="${page < totalPages}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+            </div>
+            <div th:unless="${totalEmployees!=0}">
+                <div class="alert alert-danger" role ="alert">No data!</div>
+            </div>
+        </div>
+
+
+        <div th:replace="list_image::listImage"></div>
+
+    </div>
+
+</div>
+<div th:replace="footer::footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+</body>
+</html>

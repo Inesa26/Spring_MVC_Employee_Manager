@@ -1,4 +1,4 @@
-package edu.step.manager.controller;
+package edu.step.manager.controller.api;
 
 import edu.step.manager.model.Employee;
 import edu.step.manager.model.EmployeeDTO;
@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 // Serviciu REST
 @RestController
 @RequestMapping("/employees") // localhost:8080/employees
-public class EmployeeController { /* MVC */
+public class EmployeeRestController { /* MVC */
 
     @Autowired
     private EmployeeDao dao;
@@ -67,5 +66,11 @@ public class EmployeeController { /* MVC */
     public ResponseEntity delete(@RequestParam Long id) {
         dao.delete(id);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/page")
+    public ResponseEntity<List<Employee>> getPage(
+            @RequestParam(defaultValue ="1")Integer pageNo,
+            @RequestParam(defaultValue = "10")Integer pageSize){
+        return ResponseEntity.ok().body(dao.findPage(pageNo,pageSize).getContent());
     }
 }

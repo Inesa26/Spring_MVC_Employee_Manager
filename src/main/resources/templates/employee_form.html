@@ -1,0 +1,51 @@
+<div th:fragment="form">
+    <div class="d-grid gap-3 ">
+
+        <div class="input-group">
+            <span class="input-group-text">First name</span>
+            <input type="text" name="name" aria-label="First name" class="form-control" th:field="*{name}"/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Last name</span>
+            <input type="text" name="surname" aria-label="Last name" class="form-control"
+                   th:field="*{surname}"/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Birth date</span>
+            <input type="date" name="birthdate" aria-label="Birth date" class="form-control"
+                   th:field="*{birthdate}"/>
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Salary</span>
+            <input type="number" name="salary" aria-label="Salary" class="form-control"
+                   th:field="*{salary}"/>
+        </div>
+        <!--  <div class="input-group">
+              <span class="input-group-text">Country</span>
+              <input type="text" name="country" aria-label="Country" class="form-control" value="${requestScope.country}"/>
+          </div>
+          <div class="input-group">
+              <span class="input-group-text">City</span>
+              <input type="text" name="city" aria-label="City" class="form-control" value="${requestScope.city}"/>
+          </div>
+          <div class="input-group">
+              <span class="input-group-text">Street</span>
+              <input type="text" name="street" aria-label="Street" class="form-control" value="${requestScope.street}"/>
+
+          </div>
+          <div class="input-group">
+              <span class="input-group-text">House number</span>
+              <input type="text" name="houseNumber" aria-label="House number" class="form-control" value="${requestScope.houseNumber}"/>
+          </div>
+-->
+
+
+        <div class="d-grid gap-2 d-md-block">
+
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-danger" type="reset">Clear</button>
+
+
+        </div>
+    </div>
+</div>

@@ -1,5 +1,7 @@
 package edu.step.manager.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -19,7 +21,7 @@ public class Employee {
 
     @Column(name = "salary")
     private Double salary;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthdate")
     private LocalDate birthdate;
 

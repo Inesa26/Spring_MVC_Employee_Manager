@@ -1,6 +1,7 @@
 package edu.step.manager.repository;
 
 import edu.step.manager.model.Employee;
+import edu.step.manager.model.EmployeeDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Employee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <div th:replace="header::header"></div>
+</head>
+<body class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+<div class="container">
+    <div class="d-sm-flex align-items-center justify-content-between">
+        <div>
+            <div class="d-sm-flex align-items-center justify-content-between column-gap-3">
+                <a class="btn btn-info" th:href="@{/}" role="button">Cancel</a>
+                <h1 class="text-warning">Edit employee</h1>
+            </div>
+            <form th:action="@{'/edit?id='+${id}}" th:object="${employee}" method="post" >
+                <input type="hidden" name="id" th:field="*{id}"/>
+                <div th:replace="employee_form::form"></div>
+            </form>
+
+
+        </div>
+        <div th:replace="edit_image::editImage"></div>
+    </div>
+</div>
+
+<div th:replace="footer::footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+</body>
+</html>
